@@ -39,7 +39,14 @@ def get_unique_filename(filename):
     return filename
 
 def process_image(image_path, output_path):
+
+    outputs_folder = "outputs"
+    if not os.path.exists(outputs_folder):
+        os.makedirs(outputs_folder)
+
+    output_path = os.path.join(outputs_folder, os.path.basename(output_path))
     output_path = get_unique_filename(output_path)
+
     image = cv2.imread(image_path)
     image = adjust_exposure(image)
     image = adjust_brightness(image, factor=0.9)
