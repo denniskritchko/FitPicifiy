@@ -6,6 +6,8 @@ import os
 import subprocess
 import glob
 
+
+"""allows the user to select an image file from the file dialog"""
 def select_image():
     file_path = filedialog.askopenfilename(filetypes= [("Image files", "*.jpg *.jpeg *.png")])
     if file_path:
@@ -13,6 +15,7 @@ def select_image():
         display_image(file_path, original_image_label)
         process_and_display_image(file_path)
 
+""""processes the image from fitpicify.py and displays the output image"""
 def process_and_display_image(image_path):
     outputs_folder = "outputs"
     if not os.path.exists(outputs_folder):
@@ -27,6 +30,7 @@ def process_and_display_image(image_path):
     if latest_output:
         display_image(latest_output, edited_image_label)
 
+"""displays the image on the label"""
 def display_image(image_path, label):
     image = Image.open(image_path)
     image.thumbnail((300, 300))
@@ -34,6 +38,7 @@ def display_image(image_path, label):
     label.config(image=img)
     label.image = img
 
+"""creates the main window and widgets"""
 root = tk.Tk()
 root.title("Fitpicify")
 
@@ -49,4 +54,5 @@ original_image_label.pack()
 edited_image_label = Label(root)
 edited_image_label.pack()
 
+"""starts the main event loop"""
 root.mainloop()
