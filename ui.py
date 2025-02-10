@@ -28,12 +28,14 @@ def process_and_display_image(image_path):
     latest_output = output_files[-1] if output_files else None
 
     if latest_output:
-        display_image(latest_output, edited_image_label)
+        display_image(latest_output, edited_image_label) 
 
 """displays the image on the label"""
 def display_image(image_path, label):
     image = Image.open(image_path)
 
+
+    """rotates the image based on the EXIF orientation tag"""
     try:
         for orientation in ExifTags.TAGS.keys():
             if ExifTags.TAGS[orientation] == 'Orientation':
@@ -52,6 +54,8 @@ def display_image(image_path, label):
     img = ImageTk.PhotoImage(image)
     label.config(image=img)
     label.image = img
+    
+    
 
 """creates the main window and widgets"""
 root = tk.Tk()
@@ -63,10 +67,10 @@ root.configure(background="gray")
 select_button = Button(root, text="Select Image to Edit", command=select_image, bg="light blue", fg="black")
 select_button.pack()
 
-input_label = Label(root)
+input_label = Label(root, bg="gray")
 input_label.pack(side="left", padx=10, pady=10)
 
-edited_image_label = Label(root)
+edited_image_label = Label(root, bg="gray")
 edited_image_label.pack(side="right", padx=10, pady=10)
 
 """starts the main event loop"""
