@@ -41,6 +41,8 @@ def display_image(image_path, label):
 """creates the main window and widgets"""
 root = tk.Tk()
 root.title("Fitpicify")
+root.geometry("640x480")
+
 
 input_label = Label(root, text="Select an image")
 input_label.pack()
